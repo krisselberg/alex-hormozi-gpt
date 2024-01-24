@@ -1,4 +1,4 @@
-import { IconExternalLink } from "@tabler/icons-react";
+import { IconBrandTwitter } from "@tabler/icons-react";
 import { FC } from "react";
 
 export const Navbar: FC = () => {
@@ -19,9 +19,9 @@ export const Navbar: FC = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <div className="hidden sm:flex">Alex Hormozi's Twitter</div>
+          <div className="hidden sm:flex mr-1">Alex Hormozi</div>
 
-          <IconExternalLink className="ml-1" size={20} />
+          <IconBrandTwitter className="ml-1" size={20} />
         </a>
       </div>
     </div>
