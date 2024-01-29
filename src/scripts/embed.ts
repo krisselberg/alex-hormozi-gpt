@@ -12,7 +12,7 @@ const generateEmbeddings = async (tweets: HormoziTweet[]) => {
 
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
+    process.env.SUPABASE_SERVICE_ROLE_KEY! // should probably use RLS instead of service role if possible
   );
 
   for (let i = 0; i < tweets.length; i++) {
