@@ -1,6 +1,23 @@
 import { HormoziTweet } from "@/lib/types";
 import fs from "fs";
 import { ApifyClient } from "apify-client";
+import { createClient } from "@supabase/supabase-js";
+
+//
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+async function loginToSupabase() {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: process.env.SUPABASE_SERVICE_ROLE_EMAIL!,
+    password: process.env.SUPABASE_SERVICE_ROLE_PASSWORD!,
+  });
+
+  if (error) throw error;
+  console.log("Logged in as:", data.user?.email);
+}
 
 // Initialize the ApifyClient with API token
 const client = new ApifyClient({
@@ -57,6 +74,13 @@ async function renameTimestampField() {
 
   fs.writeFileSync(filePath, JSON.stringify(updatedData, null, 2));
   console.log("Timestamp field renamed to tweet_timestamp.");
+}
+
+async function writeToDatabase(data: HormoziTweet[]) {
+  const { error } = await supabase.from("hormozi").insert([data]);
+
+  if (error) throw error;
+  console.log("Data written to the database");
 }
 
 scrapeTweets();
