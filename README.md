@@ -33,12 +33,12 @@ This allows for a chat-like experience where the user can ask questions about th
 
 Here's a quick overview of how to run it locally.
 
-Requirements
-Set up OpenAI
-You'll need an OpenAI API key to generate embeddings.
+### Requirements
 
-Set up Supabase and create a database
-Note: You don't have to use Supabase. Use whatever method you prefer to store your data. But I like Supabase and think it's easy to use.
+- Set up OpenAI: You'll need an OpenAI API key to generate embeddings.
+
+- Set up Supabase and create a database
+  Note: You don't have to use Supabase. Use whatever method you prefer to store your data.
 
 There is a schema.sql file in the root of the repo that you can use to set up the database.
 
@@ -46,34 +46,43 @@ Run that in the SQL editor in Supabase as directed.
 
 I recommend turning on Row Level Security and setting up a service role to use with the app.
 
-Repo Setup
-Clone repo
+### Repo Setup
+
+#### Clone repo
+
+```bash
 git clone https://github.com/mckaywrigley/paul-graham-gpt.git
-Install dependencies
+```
+
+#### Install dependencies
+
+```bash
 npm i
-Set up environment variables
-Create a .env.local file in the root of the repo with the following variables:
+```
 
-OPENAI_API_KEY=
+#### Set up environment variables
 
-NEXT_PUBLIC_SUPABASE_URL=
-SUPABASE_SERVICE_ROLE_KEY=
-Dataset
-Run scraping script
-npm run scrape
-This scrapes all of the essays from Paul Graham's website and saves them to a json file.
+Create a .env file with variables listed in the .env.example
 
-Run embedding script
+#### Dataset
+
+Unfortunately, the tweet scraper used to get Alex Hormozi's tweets was deprecated (Apify's Tweet Flash Plus) a few days after I used it. Feel free to use the hormozi.json file included in the repo or the Twitter API/an alternative scraping method to get a JSON of tweets.
+
+#### Run embedding script
+
+```bash
 npm run embed
+```
+
 This reads the json file, generates embeddings for each chunk of text, and saves the results to your database.
 
 There is a 200ms delay between each request to avoid rate limiting.
 
-This process will take 20-30 minutes.
-
-App
 Run app
+
+```bash
 npm run dev
+```
 
 ## Credits
 
