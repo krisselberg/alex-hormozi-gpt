@@ -1,7 +1,5 @@
 import { supabaseAdmin } from "@/lib";
 
-export const runtime = "edge";
-
 export const POST = async (req: Request): Promise<Response> => {
   try {
     const { query, apiKey, matches } = (await req.json()) as {

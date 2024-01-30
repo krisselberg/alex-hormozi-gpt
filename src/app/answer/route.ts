@@ -1,7 +1,5 @@
 import { OpenAIStream } from "@/lib";
 
-export const runtime = "edge";
-
 export const POST = async (req: Request): Promise<Response> => {
   try {
     const { prompt, apiKey } = (await req.json()) as {
